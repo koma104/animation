@@ -8,38 +8,62 @@
     <script src="js/main.js" defer></script>
   </head>
   <body>
-    <header class="header">
+    <header class="header" role="banner">
       <h1>アニメーションギャラリー</h1>
     </header>
-    <main>
-      <div class="animation-grid">
-        <div class="animation-card" data-animation="fade">
-          <div class="animation-preview">
+    <main role="main">
+      <div class="animation-grid" role="list" aria-label="アニメーション一覧">
+        <div class="animation-card" role="listitem" data-animation="fade">
+          <div class="animation-preview" aria-hidden="true">
             <div class="animation-target"></div>
           </div>
-          <h3>フェードイン</h3>
-          <button class="play-btn">再生</button>
+          <h3 id="fade-title">フェードイン</h3>
+          <button
+            class="play-btn"
+            aria-describedby="fade-title"
+            aria-label="フェードインアニメーションを再生"
+          >
+            再生
+          </button>
         </div>
-        <div class="animation-card" data-animation="slide">
-          <div class="animation-preview">
+        <div class="animation-card" role="listitem" data-animation="slide">
+          <div class="animation-preview" aria-hidden="true">
             <div class="animation-target"></div>
           </div>
-          <h3>スライドイン</h3>
-          <button class="play-btn">再生</button>
+          <h3 id="slide-title">スライドイン</h3>
+          <button
+            class="play-btn"
+            aria-describedby="slide-title"
+            aria-label="スライドインアニメーションを再生"
+          >
+            再生
+          </button>
         </div>
-        <div class="animation-card" data-animation="bounce">
-          <div class="animation-preview">
+        <div class="animation-card" role="listitem" data-animation="bounce">
+          <div class="animation-preview" aria-hidden="true">
             <div class="animation-target"></div>
           </div>
-          <h3>バウンス</h3>
-          <button class="play-btn">再生</button>
+          <h3 id="bounce-title">バウンス</h3>
+          <button
+            class="play-btn"
+            aria-describedby="bounce-title"
+            aria-label="バウンスアニメーションを再生"
+          >
+            再生
+          </button>
         </div>
-        <div class="animation-card" data-animation="rotate">
-          <div class="animation-preview">
+        <div class="animation-card" role="listitem" data-animation="rotate">
+          <div class="animation-preview" aria-hidden="true">
             <div class="animation-target"></div>
           </div>
-          <h3>回転</h3>
-          <button class="play-btn">再生</button>
+          <h3 id="rotate-title">回転</h3>
+          <button
+            class="play-btn"
+            aria-describedby="rotate-title"
+            aria-label="回転アニメーションを再生"
+          >
+            再生
+          </button>
         </div>
       </div>
     </main>
