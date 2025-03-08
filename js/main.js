@@ -1,6 +1,14 @@
 document.addEventListener('DOMContentLoaded', () => {
   const cards = document.querySelectorAll('.animation-card');
 
+  // スキップリンクの処理
+  const mainContent = document.getElementById('main-content');
+  if (mainContent) {
+    mainContent.addEventListener('blur', () => {
+      mainContent.removeAttribute('tabindex');
+    });
+  }
+
   cards.forEach((card) => {
     const playBtn = card.querySelector('.play-btn');
     const previewContainer = card.querySelector('.animation-preview');
@@ -11,11 +19,24 @@ document.addEventListener('DOMContentLoaded', () => {
     // アニメーション状態を追跡
     let isPlaying = false;
 
+    // アニメーション状態を視覚的に表示
+    const updateButtonState = (playing) => {
+      if (playing) {
+        playBtn.setAttribute('disabled', 'true');
+        playBtn.setAttribute('aria-busy', 'true');
+        playBtn.querySelector('.btn-text').textContent = '再生中...';
+      } else {
+        playBtn.removeAttribute('disabled');
+        playBtn.removeAttribute('aria-busy');
+        playBtn.querySelector('.btn-text').textContent = '再生';
+      }
+    };
+
     // アニメーション終了時のハンドラー
     const handleAnimationEnd = (event) => {
       isPlaying = false;
       event.target.classList.remove(`${animationType}-animation`);
-      playBtn.removeAttribute('disabled');
+      updateButtonState(false);
 
       // スクリーンリーダーに通知
       announceAnimationComplete(title);
@@ -26,7 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       // アニメーション再生中は再生ボタンを無効化
       isPlaying = true;
-      playBtn.setAttribute('disabled', 'true');
+      updateButtonState(true);
 
       // アニメーションをリセットするために、要素を複製して置き換える
       const newTarget = document.createElement('div');

@@ -185,6 +185,19 @@ body {
   }
 }
 
+@keyframes shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-10px);
+  }
+  75% {
+    transform: translateX(10px);
+  }
+}
+
 /* アニメーションクラス */
 .fade-animation {
   animation: fade 1s ease-in-out;
@@ -200,4 +213,54 @@ body {
 
 .rotate-animation {
   animation: rotate 1s linear;
+}
+
+.shake-animation {
+  animation: shake 0.5s ease-in-out;
+}
+
+/* スキップリンク */
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: #2c3e50;
+  color: white;
+  padding: 8px;
+  z-index: 100;
+  transition: top 0.3s;
+}
+
+.skip-link:focus {
+  top: 0;
+}
+
+/* フッター */
+.footer {
+  background-color: #fff;
+  padding: 1.5rem;
+  text-align: center;
+  box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+  margin-top: 2rem;
+}
+
+/* フォーカス可能な要素のアウトライン強化 */
+:focus {
+  outline: 3px solid #f39c12;
+  outline-offset: 2px;
+}
+
+/* キーボードフォーカスのみに適用 */
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+:focus-visible {
+  outline: 3px solid #f39c12;
+  outline-offset: 2px;
+}
+
+/* メインコンテンツのフォーカス時のアウトライン非表示 */
+main:focus {
+  outline: none;
 }
