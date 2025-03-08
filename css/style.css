@@ -264,3 +264,77 @@ body {
 main:focus {
   outline: none;
 }
+
+/* キラキラアニメーション */
+@keyframes sparkle {
+  0% {
+    transform: scale(1) rotate(0);
+    filter: brightness(1);
+  }
+  25% {
+    transform: scale(1.2) rotate(90deg);
+    filter: brightness(1.5);
+  }
+  50% {
+    transform: scale(1) rotate(180deg);
+    filter: brightness(1);
+  }
+  75% {
+    transform: scale(1.2) rotate(270deg);
+    filter: brightness(1.5);
+  }
+  100% {
+    transform: scale(1) rotate(360deg);
+    filter: brightness(1);
+  }
+}
+
+/* マジカルアニメーション */
+@keyframes magic {
+  0% {
+    transform: scale(1);
+    clip-path: circle(50%);
+  }
+  25% {
+    transform: scale(1.1);
+    clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+  }
+  50% {
+    transform: scale(0.9);
+    clip-path: polygon(50% 0%, 100% 0, 100% 100%, 0 100%, 0 0);
+  }
+  75% {
+    transform: scale(1.1);
+    clip-path: polygon(20% 0%, 80% 0%, 100% 20%, 100% 80%, 80% 100%, 20% 100%, 0% 80%, 0% 20%);
+  }
+  100% {
+    transform: scale(1);
+    clip-path: circle(50%);
+  }
+}
+
+/* アニメーションクラス */
+.sparkle-animation {
+  animation: sparkle 1.5s ease-in-out;
+}
+
+.magic-animation {
+  animation: magic 2s ease-in-out;
+}
+
+/* アニメーション要素のスタイル調整 */
+[data-animation='sparkle'] .animation-target {
+  background: linear-gradient(45deg, #3498db, #e74c3c);
+}
+
+[data-animation='magic'] .animation-target {
+  background: linear-gradient(135deg, #9b59b6, #3498db);
+}
+
+/* アクセシビリティ対応 */
+@media (prefers-reduced-motion: reduce) {
+  .sparkle-animation,
+  .magic-animation {
+    animation-duration: 0.1s !important;
+  }
+}
