@@ -106,7 +106,10 @@
 
         <div class="animation-card" role="listitem" data-animation="slide-transition">
           <div class="animation-preview" aria-hidden="true">
-            <div class="transition-layer"></div>
+            <div class="transition-layer-1"></div>
+            <div class="transition-layer-2"></div>
+            <div class="text-content first">Transition</div>
+            <div class="text-content second">Animation</div>
           </div>
           <h3 id="slide-transition-title">Slide Transition</h3>
           <button
@@ -115,7 +118,10 @@
             aria-label="Play slide transition animation"
           >
             <span class="btn-text">Play</span>
-            <span class="sr-only">(Animation description: Layers slide in from both sides)</span>
+            <span class="sr-only"
+              >(Animation description: Layers slide in from both sides, then text appears
+              twice)</span
+            >
           </button>
         </div>
 
@@ -169,6 +175,26 @@
           >
             <span class="btn-text">Play</span>
             <span class="sr-only">(Animation description: Line appears and splits into two)</span>
+          </button>
+        </div>
+
+        <!-- テキスト出現アニメーション -->
+        <div class="animation-card" role="listitem" data-animation="text-reveal">
+          <div class="animation-preview" aria-hidden="true">
+            <div class="animation-target">
+              <span class="text-line">Purpose</span>
+              <span class="text-line">ココロ動かす</span>
+              <span class="text-line">感動を。</span>
+            </div>
+          </div>
+          <h3 id="text-reveal-title">Text Reveal</h3>
+          <button
+            class="play-btn"
+            aria-describedby="text-reveal-title"
+            aria-label="Play text reveal animation"
+          >
+            <span class="btn-text">Play</span>
+            <span class="sr-only">(Animation description: Text appears with line animation)</span>
           </button>
         </div>
       </div>

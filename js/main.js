@@ -44,6 +44,8 @@ document.addEventListener('DOMContentLoaded', () => {
       let duration = 2000;
       switch (animationType) {
         case 'slide-transition':
+          duration = 5000; // アニメーション全体の時間を5秒に設定
+          break;
         case 'diagonal-transition':
           duration = 2200;
           break;
@@ -53,6 +55,9 @@ document.addEventListener('DOMContentLoaded', () => {
         case 'line-reveal-1':
         case 'line-reveal-2':
           duration = 1200; // ライン分割アニメーションの時間を設定
+          break;
+        case 'text-reveal':
+          duration = 2000; // テキスト出現アニメーションの時間を設定
           break;
         default:
           duration = 1000;

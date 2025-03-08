@@ -400,24 +400,120 @@ main:focus {
   overflow: hidden;
 }
 
-/* スライドトランジション */
-.slide-transition-animation .transition-layer::before,
-.slide-transition-animation .transition-layer::after {
+/* スライドトランジションのスタイル更新 */
+[data-animation='slide-transition'] .animation-preview {
+  position: relative;
+  overflow: hidden;
+}
+
+[data-animation='slide-transition'] .initial-slide {
+  position: absolute;
+  inset: 0;
+  background-color: var(--text-primary);
+  transform: translateX(-101%);
+  z-index: 2;
+}
+
+[data-animation='slide-transition'] .transition-layer {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+}
+
+[data-animation='slide-transition'] .transition-layer::before,
+[data-animation='slide-transition'] .transition-layer::after {
   content: '';
   position: absolute;
   inset: 0;
+  transform: translateX(-101%);
+}
+
+[data-animation='slide-transition'] .transition-layer::before {
+  background-color: var(--text-primary);
+}
+
+[data-animation='slide-transition'] .transition-layer::after {
+  background-color: var(--text-secondary);
+}
+
+/* アニメーションの定義 */
+@keyframes slideIn {
+  0% {
+    transform: translateX(-101%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideOut {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(101%);
+  }
+}
+
+/* アニメーションの順序を更新 */
+.slide-transition-animation .initial-slide {
+  animation: slideIn 0.8s cubic-bezier(0.87, 0.05, 0.02, 0.97) forwards,
+    slideOut 0.8s cubic-bezier(0.87, 0.05, 0.02, 0.97) 1.2s forwards;
 }
 
 .slide-transition-animation .transition-layer::before {
-  background-color: #000;
-  animation: slideTransitionIn 0.8s cubic-bezier(0.87, 0.05, 0.02, 0.97) both,
-    slideTransitionOut 0.8s cubic-bezier(0.87, 0.05, 0.02, 0.97) 1.2s forwards;
+  animation: slideIn 0.8s cubic-bezier(0.87, 0.05, 0.02, 0.97) 2.4s forwards,
+    slideOut 0.8s cubic-bezier(0.87, 0.05, 0.02, 0.97) 3.6s forwards;
 }
 
 .slide-transition-animation .transition-layer::after {
-  background-color: #333;
-  animation: slideTransitionIn 0.8s cubic-bezier(0.87, 0.05, 0.02, 0.97) 0.2s both,
-    slideTransitionOut 0.8s cubic-bezier(0.87, 0.05, 0.02, 0.97) 1.4s forwards;
+  animation: slideIn 0.8s cubic-bezier(0.87, 0.05, 0.02, 0.97) 2.6s forwards,
+    slideOut 0.8s cubic-bezier(0.87, 0.05, 0.02, 0.97) 3.8s forwards;
+}
+
+/* テキストスタイルとアニメーション */
+[data-animation='slide-transition'] .text-content {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  color: var(--text-primary);
+  font-size: 1.5rem;
+  font-weight: 700;
+  opacity: 0;
+  z-index: 5;
+}
+
+@keyframes textFadeIn {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -30%);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+}
+
+@keyframes textFadeOut {
+  from {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+  to {
+    opacity: 0;
+    transform: translate(-50%, -70%);
+  }
+}
+
+/* テキストアニメーションのタイミング */
+.slide-transition-animation .text-content.first {
+  animation: textFadeIn 0.8s cubic-bezier(0.4, 0, 0.2, 1) 2s forwards,
+    textFadeOut 0.4s cubic-bezier(0.4, 0, 0.2, 1) 2.2s forwards;
+}
+
+.slide-transition-animation .text-content.second {
+  animation: textFadeIn 0.8s cubic-bezier(0.4, 0, 0.2, 1) 4s forwards;
 }
 
 /* 斜めトランジション */
@@ -702,4 +798,191 @@ main:focus {
 .line-reveal-2-animation .line:nth-child(2) {
   animation: lineSplit 0.6s cubic-bezier(0.83, 0, 0.17, 1) forwards,
     lineSplitRight 0.6s cubic-bezier(0.83, 0, 0.17, 1) 0.6s forwards;
+}
+
+/* テキスト出現アニメーション */
+[data-animation='text-reveal'] .animation-target {
+  width: auto;
+  height: auto;
+  background-color: transparent;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+[data-animation='text-reveal'] .text-line {
+  position: relative;
+  color: var(--text-primary);
+  font-size: 1.2rem;
+  font-weight: 700;
+  overflow: hidden;
+  padding: 0.2em 0;
+}
+
+[data-animation='text-reveal'] .text-line::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--text-primary);
+  transform: scaleX(0);
+  transform-origin: left;
+}
+
+[data-animation='text-reveal'] .text-line:nth-child(2) {
+  font-size: 1.5rem;
+}
+
+/* テキスト出現のアニメーション */
+@keyframes textRevealMask {
+  0% {
+    transform: scaleX(0);
+  }
+  50% {
+    transform: scaleX(1);
+  }
+  100% {
+    transform: scaleX(1);
+    transform-origin: right;
+  }
+}
+
+@keyframes textRevealContent {
+  0% {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+  50% {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* アニメーションクラス */
+.text-reveal-animation .text-line {
+  animation: textRevealContent 1.2s cubic-bezier(0.83, 0, 0.17, 1) forwards;
+}
+
+.text-reveal-animation .text-line::before {
+  animation: textRevealMask 1.2s cubic-bezier(0.83, 0, 0.17, 1) forwards;
+}
+
+/* ディレイを設定 */
+.text-reveal-animation .text-line:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.text-reveal-animation .text-line:nth-child(1)::before {
+  animation-delay: 0s;
+}
+
+.text-reveal-animation .text-line:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.text-reveal-animation .text-line:nth-child(2)::before {
+  animation-delay: 0.2s;
+}
+
+.text-reveal-animation .text-line:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+.text-reveal-animation .text-line:nth-child(3)::before {
+  animation-delay: 0.4s;
+}
+
+/* テキスト表示アニメーション */
+@keyframes textFadeIn {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -30%);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+}
+
+/* テキストフェードアウトアニメーション追加 */
+@keyframes textFadeOut {
+  from {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+  to {
+    opacity: 0;
+    transform: translate(-50%, -70%);
+  }
+}
+
+/* トランジションレイヤーのz-indexを調整 */
+.slide-transition-animation .transition-layer {
+  z-index: 3;
+}
+
+/* 初期スライド要素を削除し、transition-layerを2つ用意 */
+[data-animation='slide-transition'] .transition-layer-1,
+[data-animation='slide-transition'] .transition-layer-2 {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+}
+
+[data-animation='slide-transition'] .transition-layer-1::before,
+[data-animation='slide-transition'] .transition-layer-1::after,
+[data-animation='slide-transition'] .transition-layer-2::before,
+[data-animation='slide-transition'] .transition-layer-2::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  transform: translateX(-101%);
+}
+
+[data-animation='slide-transition'] .transition-layer-1::before,
+[data-animation='slide-transition'] .transition-layer-2::before {
+  background-color: var(--text-primary);
+}
+
+[data-animation='slide-transition'] .transition-layer-1::after,
+[data-animation='slide-transition'] .transition-layer-2::after {
+  background-color: var(--text-secondary);
+}
+
+/* アニメーションの順序を更新 */
+.slide-transition-animation .transition-layer-1::before {
+  animation: slideIn 0.8s cubic-bezier(0.87, 0.05, 0.02, 0.97) forwards,
+    slideOut 0.8s cubic-bezier(0.87, 0.05, 0.02, 0.97) 1.2s forwards;
+}
+
+.slide-transition-animation .transition-layer-1::after {
+  animation: slideIn 0.8s cubic-bezier(0.87, 0.05, 0.02, 0.97) 0.2s forwards,
+    slideOut 0.8s cubic-bezier(0.87, 0.05, 0.02, 0.97) 1.4s forwards;
+}
+
+.slide-transition-animation .transition-layer-2::before {
+  animation: slideIn 0.8s cubic-bezier(0.87, 0.05, 0.02, 0.97) 2.4s forwards,
+    slideOut 0.8s cubic-bezier(0.87, 0.05, 0.02, 0.97) 3.6s forwards;
+}
+
+.slide-transition-animation .transition-layer-2::after {
+  animation: slideIn 0.8s cubic-bezier(0.87, 0.05, 0.02, 0.97) 2.6s forwards,
+    slideOut 0.8s cubic-bezier(0.87, 0.05, 0.02, 0.97) 3.8s forwards;
+}
+
+/* テキストのアニメーションタイミングはそのまま */
+.slide-transition-animation .text-content.first {
+  animation: textFadeIn 0.8s cubic-bezier(0.4, 0, 0.2, 1) 2s forwards,
+    textFadeOut 0.4s cubic-bezier(0.4, 0, 0.2, 1) 2.2s forwards;
+}
+
+.slide-transition-animation .text-content.second {
+  animation: textFadeIn 0.8s cubic-bezier(0.4, 0, 0.2, 1) 4s forwards;
 }
