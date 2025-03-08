@@ -1,156 +1,142 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta
-      name="description"
-      content="さまざまなCSSアニメーションを紹介するギャラリーページです。"
-    />
-    <title>アニメーション一覧</title>
+    <meta name="description" content="A gallery page showcasing various CSS animations." />
+    <title>Animation Gallery</title>
     <link rel="stylesheet" href="css/style.css" />
     <script src="js/main.js" defer></script>
   </head>
   <body>
-    <a href="#main-content" class="skip-link">メインコンテンツにスキップ</a>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
     <header class="header" role="banner">
-      <h1>アニメーションギャラリー</h1>
+      <h1>Animation Gallery</h1>
     </header>
     <main id="main-content" role="main" tabindex="-1">
-      <h2 class="sr-only">アニメーション一覧</h2>
-      <div class="animation-grid" role="list" aria-label="アニメーション一覧">
+      <h2 class="sr-only">Animation List</h2>
+      <div class="animation-grid" role="list" aria-label="Animation list">
         <div class="animation-card" role="listitem" data-animation="fade">
           <div class="animation-preview" aria-hidden="true">
             <div class="animation-target"></div>
           </div>
-          <h3 id="fade-title">フェードイン</h3>
+          <h3 id="fade-title">Fade In</h3>
           <button
             class="play-btn"
             aria-describedby="fade-title"
-            aria-label="フェードインアニメーションを再生"
+            aria-label="Play fade in animation"
           >
-            <span class="btn-text">再生</span>
-            <span class="sr-only">（アニメーションの説明：要素が透明から不透明に変化します）</span>
+            <span class="btn-text">Play</span>
+            <span class="sr-only"
+              >(Animation description: Element fades from transparent to opaque)</span
+            >
           </button>
         </div>
+
         <div class="animation-card" role="listitem" data-animation="slide">
           <div class="animation-preview" aria-hidden="true">
             <div class="animation-target"></div>
           </div>
-          <h3 id="slide-title">スライドイン</h3>
+          <h3 id="slide-title">Slide In</h3>
           <button
             class="play-btn"
             aria-describedby="slide-title"
-            aria-label="スライドインアニメーションを再生"
+            aria-label="Play slide in animation"
           >
-            <span class="btn-text">再生</span>
-            <span class="sr-only">（アニメーションの説明：要素が左から右へスライドします）</span>
+            <span class="btn-text">Play</span>
+            <span class="sr-only">(Animation description: Element slides from left to right)</span>
           </button>
         </div>
+
         <div class="animation-card" role="listitem" data-animation="bounce">
           <div class="animation-preview" aria-hidden="true">
             <div class="animation-target"></div>
           </div>
-          <h3 id="bounce-title">バウンス</h3>
+          <h3 id="bounce-title">Bounce</h3>
           <button
             class="play-btn"
             aria-describedby="bounce-title"
-            aria-label="バウンスアニメーションを再生"
+            aria-label="Play bounce animation"
           >
-            <span class="btn-text">再生</span>
-            <span class="sr-only">（アニメーションの説明：要素が上下にバウンドします）</span>
+            <span class="btn-text">Play</span>
+            <span class="sr-only">(Animation description: Element bounces up and down)</span>
           </button>
         </div>
+
         <div class="animation-card" role="listitem" data-animation="rotate">
           <div class="animation-preview" aria-hidden="true">
             <div class="animation-target"></div>
           </div>
-          <h3 id="rotate-title">回転</h3>
+          <h3 id="rotate-title">Rotate</h3>
           <button
             class="play-btn"
             aria-describedby="rotate-title"
-            aria-label="回転アニメーションを再生"
+            aria-label="Play rotate animation"
           >
-            <span class="btn-text">再生</span>
-            <span class="sr-only">（アニメーションの説明：要素が360度回転します）</span>
+            <span class="btn-text">Play</span>
+            <span class="sr-only">(Animation description: Element rotates 360 degrees)</span>
           </button>
         </div>
+
         <div class="animation-card" role="listitem" data-animation="shake">
           <div class="animation-preview" aria-hidden="true">
             <div class="animation-target"></div>
           </div>
-          <h3 id="shake-title">シェイク</h3>
-          <button
-            class="play-btn"
-            aria-describedby="shake-title"
-            aria-label="シェイクアニメーションを再生"
-          >
-            <span class="btn-text">再生</span>
-            <span class="sr-only">（アニメーションの説明：要素が左右に揺れます）</span>
+          <h3 id="shake-title">Shake</h3>
+          <button class="play-btn" aria-describedby="shake-title" aria-label="Play shake animation">
+            <span class="btn-text">Play</span>
+            <span class="sr-only">(Animation description: Element shakes left and right)</span>
           </button>
         </div>
+
         <div class="animation-card" role="listitem" data-animation="sparkle">
           <div class="animation-preview" aria-hidden="true">
             <div class="animation-target"></div>
           </div>
-          <h3 id="sparkle-title">キラキラ</h3>
+          <h3 id="sparkle-title">Sparkle</h3>
           <button
             class="play-btn"
             aria-describedby="sparkle-title"
-            aria-label="キラキラアニメーションを再生"
+            aria-label="Play sparkle animation"
           >
-            <span class="btn-text">再生</span>
-            <span class="sr-only">（アニメーションの説明：要素が輝きながら回転します）</span>
+            <span class="btn-text">Play</span>
+            <span class="sr-only">(Animation description: Element sparkles while rotating)</span>
           </button>
         </div>
-        <div class="animation-card" role="listitem" data-animation="magic">
-          <div class="animation-preview" aria-hidden="true">
-            <div class="animation-target"></div>
-          </div>
-          <h3 id="magic-title">マジカル</h3>
-          <button
-            class="play-btn"
-            aria-describedby="magic-title"
-            aria-label="マジカルアニメーションを再生"
-          >
-            <span class="btn-text">再生</span>
-            <span class="sr-only">（アニメーションの説明：要素が魔法のように変形します）</span>
-          </button>
-        </div>
+
         <div class="animation-card" role="listitem" data-animation="slide-transition">
           <div class="animation-preview" aria-hidden="true">
             <div class="transition-layer"></div>
           </div>
-          <h3 id="slide-transition-title">スライドトランジション</h3>
+          <h3 id="slide-transition-title">Slide Transition</h3>
           <button
             class="play-btn"
             aria-describedby="slide-transition-title"
-            aria-label="スライドトランジションアニメーションを再生"
+            aria-label="Play slide transition animation"
           >
-            <span class="btn-text">再生</span>
-            <span class="sr-only"
-              >（アニメーションの説明：要素が左右から流れるように現れます）</span
-            >
+            <span class="btn-text">Play</span>
+            <span class="sr-only">(Animation description: Layers slide in from both sides)</span>
           </button>
         </div>
+
         <div class="animation-card" role="listitem" data-animation="diagonal-transition">
           <div class="animation-preview" aria-hidden="true">
             <div class="transition-layer diagonal"></div>
           </div>
-          <h3 id="diagonal-transition-title">斜めトランジション</h3>
+          <h3 id="diagonal-transition-title">Diagonal Transition</h3>
           <button
             class="play-btn"
             aria-describedby="diagonal-transition-title"
-            aria-label="斜めトランジションアニメーションを再生"
+            aria-label="Play diagonal transition animation"
           >
-            <span class="btn-text">再生</span>
-            <span class="sr-only">（アニメーションの説明：要素が斜めに流れるように現れます）</span>
+            <span class="btn-text">Play</span>
+            <span class="sr-only">(Animation description: Layers slide in diagonally)</span>
           </button>
         </div>
       </div>
     </main>
     <footer role="contentinfo" class="footer">
-      <p>© 2023 アニメーションギャラリー - アクセシビリティに配慮したデモページ</p>
+      <p>© 2024 Animation Gallery - An accessible demo page</p>
     </footer>
   </body>
 </html>

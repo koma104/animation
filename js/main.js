@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
       isPlaying = false;
       playBtn.removeAttribute('disabled');
       playBtn.removeAttribute('aria-busy');
-      playBtn.querySelector('.btn-text').textContent = '再生';
+      playBtn.querySelector('.btn-text').textContent = 'Play';
 
       // トランジションアニメーションの場合
       if (animationType.includes('transition')) {
@@ -74,7 +74,7 @@ document.addEventListener('DOMContentLoaded', () => {
       isPlaying = true;
       playBtn.setAttribute('disabled', 'true');
       playBtn.setAttribute('aria-busy', 'true');
-      playBtn.querySelector('.btn-text').textContent = '再生中...';
+      playBtn.querySelector('.btn-text').textContent = 'Playing...';
 
       // トランジションアニメーションの場合
       if (animationType.includes('transition')) {
@@ -117,10 +117,10 @@ const liveRegion = createLiveRegion();
 
 // アニメーション開始時の通知
 const announceAnimationStart = (animationName) => {
-  liveRegion.textContent = `${animationName}アニメーションを開始しました`;
+  liveRegion.textContent = `${animationName} animation started`;
 };
 
 // アニメーション終了時の通知
 const announceAnimationComplete = (animationName) => {
-  liveRegion.textContent = `${animationName}アニメーションが完了しました`;
+  liveRegion.textContent = `${animationName} animation completed`;
 };
