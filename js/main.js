@@ -62,6 +62,9 @@ document.addEventListener('DOMContentLoaded', () => {
         case 'circle-scale':
           duration = 2000; // 円形拡大アニメーションの時間を設定
           break;
+        case 'text-slide-up':
+          duration = 1000; // テキストスライドアップアニメーションの時間を設定
+          break;
         default:
           duration = 1000;
       }
