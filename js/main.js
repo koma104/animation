@@ -52,13 +52,6 @@ document.addEventListener('DOMContentLoaded', () => {
         case 'sparkle':
           duration = 1500;
           break;
-        case 'line-reveal-1':
-        case 'line-reveal-2':
-          duration = 1200; // ライン分割アニメーションの時間を設定
-          break;
-        case 'text-reveal':
-          duration = 2000; // テキスト出現アニメーションの時間を設定
-          break;
         case 'circle-scale':
           duration = 2000; // 円形拡大アニメーションの時間を設定
           break;
