@@ -49,6 +49,8 @@ body {
   background-color: #f8f9fa;
   border-radius: 4px;
   margin-bottom: 1rem;
+  position: relative;
+  overflow: hidden;
 }
 
 .animation-target {
@@ -56,6 +58,8 @@ body {
   height: 50px;
   background-color: #3498db;
   border-radius: 4px;
+  position: relative;
+  transform-origin: center center;
 }
 
 .animation-card h3 {
@@ -194,24 +198,28 @@ body {
 }
 
 /* アニメーションクラス */
-.fade-animation {
+.fade-animation .animation-target {
   animation: fade 1s ease-in-out;
 }
 
-.slide-animation {
+.slide-animation .animation-target {
   animation: slide 1s ease-in-out;
 }
 
-.bounce-animation {
+.bounce-animation .animation-target {
   animation: bounce 1s ease-in-out;
 }
 
-.rotate-animation {
+.rotate-animation .animation-target {
   animation: rotate 1s linear;
 }
 
-.shake-animation {
+.shake-animation .animation-target {
   animation: shake 0.5s ease-in-out;
+}
+
+.sparkle-animation .animation-target {
+  animation: sparkle 1.5s ease-in-out;
 }
 
 /* スキップリンク */
@@ -309,10 +317,6 @@ main:focus {
 }
 
 /* アニメーションクラス */
-.sparkle-animation {
-  animation: sparkle 1.5s ease-in-out;
-}
-
 .magic-animation {
   animation: magic 2s ease-in-out;
 }
@@ -332,4 +336,135 @@ main:focus {
   .magic-animation {
     animation-duration: 0.1s !important;
   }
+}
+
+/* トランジションアニメーション用のスタイル */
+[data-animation='slide-transition'] .animation-preview,
+[data-animation='diagonal-transition'] .animation-preview {
+  position: relative;
+  overflow: hidden;
+}
+
+/* スライドトランジション */
+.slide-transition-animation .transition-layer::before,
+.slide-transition-animation .transition-layer::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+}
+
+.slide-transition-animation .transition-layer::before {
+  background-color: #3498db;
+  animation: slideTransitionIn 0.8s cubic-bezier(0.87, 0.05, 0.02, 0.97) both,
+    slideTransitionOut 0.8s cubic-bezier(0.87, 0.05, 0.02, 0.97) 1.2s forwards;
+}
+
+.slide-transition-animation .transition-layer::after {
+  background-color: #2980b9;
+  animation: slideTransitionIn 0.8s cubic-bezier(0.87, 0.05, 0.02, 0.97) 0.2s both,
+    slideTransitionOut 0.8s cubic-bezier(0.87, 0.05, 0.02, 0.97) 1.4s forwards;
+}
+
+/* 斜めトランジション */
+.diagonal-transition-animation .transition-layer.diagonal::before,
+.diagonal-transition-animation .transition-layer.diagonal::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  --skew-angle: 45deg;
+}
+
+.diagonal-transition-animation .transition-layer.diagonal::before {
+  background-color: #3498db;
+  transform: translateX(-101%) skewX(calc(var(--skew-angle) * -1));
+  animation: diagonalTransitionIn 0.8s cubic-bezier(0.87, 0.05, 0.02, 0.97) both,
+    diagonalTransitionOut 0.8s cubic-bezier(0.87, 0.05, 0.02, 0.97) 1.2s forwards;
+}
+
+.diagonal-transition-animation .transition-layer.diagonal::after {
+  background-color: #2980b9;
+  transform: translateX(-101%) skewX(calc(var(--skew-angle) * -1));
+  animation: diagonalTransitionIn 0.8s cubic-bezier(0.87, 0.05, 0.02, 0.97) 0.2s both,
+    diagonalTransitionOut 0.8s cubic-bezier(0.87, 0.05, 0.02, 0.97) 1.4s forwards;
+}
+
+@keyframes slideTransitionIn {
+  from {
+    transform: translateX(-101%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideTransitionOut {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(101%);
+  }
+}
+
+@keyframes diagonalTransitionIn {
+  from {
+    transform: translateX(-101%) skewX(calc(var(--skew-angle) * -1));
+  }
+  to {
+    transform: translateX(0) skewX(calc(var(--skew-angle) * -1));
+  }
+}
+
+@keyframes diagonalTransitionOut {
+  from {
+    transform: translateX(0) skewX(calc(var(--skew-angle) * -1));
+  }
+  to {
+    transform: translateX(101%) skewX(calc(var(--skew-angle) * -1));
+  }
+}
+
+/* アクセシビリティ対応 */
+@media (prefers-reduced-motion: reduce) {
+  .slide-transition-animation .transition-layer::before,
+  .slide-transition-animation .transition-layer::after,
+  .diagonal-transition-animation .transition-layer.diagonal::before,
+  .diagonal-transition-animation .transition-layer.diagonal::after {
+    animation-duration: 0.1s !important;
+  }
+}
+
+/* 各アニメーションのスタイル - animation-targetに直接適用 */
+[data-animation='fade'] .animation-target.fade-animation {
+  animation: fade 1s ease-in-out;
+}
+
+[data-animation='slide'] .animation-target.slide-animation {
+  animation: slide 1s ease-in-out;
+}
+
+[data-animation='bounce'] .animation-target.bounce-animation {
+  animation: bounce 1s ease-in-out;
+}
+
+[data-animation='rotate'] .animation-target.rotate-animation {
+  animation: rotate 1s linear;
+}
+
+[data-animation='shake'] .animation-target.shake-animation {
+  animation: shake 0.5s ease-in-out;
+}
+
+[data-animation='sparkle'] .animation-target.sparkle-animation {
+  animation: sparkle 1.5s ease-in-out;
+  background: linear-gradient(45deg, #3498db, #e74c3c);
+}
+
+/* トランジションアニメーションのスタイル */
+[data-animation='slide-transition'] .transition-layer,
+[data-animation='diagonal-transition'] .transition-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
 }

@@ -11,59 +11,85 @@ document.addEventListener('DOMContentLoaded', () => {
 
   cards.forEach((card) => {
     const playBtn = card.querySelector('.play-btn');
-    const previewContainer = card.querySelector('.animation-preview');
-    let target = card.querySelector('.animation-target');
     const animationType = card.dataset.animation;
+    const previewContainer = card.querySelector('.animation-preview');
+    const target = card.querySelector('.animation-target');
     const title = card.querySelector('h3').textContent;
-
-    // アニメーション状態を追跡
     let isPlaying = false;
+    let resetTimeout;
 
-    // アニメーション状態を視覚的に表示
-    const updateButtonState = (playing) => {
-      if (playing) {
-        playBtn.setAttribute('disabled', 'true');
-        playBtn.setAttribute('aria-busy', 'true');
-        playBtn.querySelector('.btn-text').textContent = '再生中...';
-      } else {
-        playBtn.removeAttribute('disabled');
-        playBtn.removeAttribute('aria-busy');
-        playBtn.querySelector('.btn-text').textContent = '再生';
+    // アニメーション状態のリセット
+    const resetAnimation = () => {
+      isPlaying = false;
+      playBtn.removeAttribute('disabled');
+      playBtn.removeAttribute('aria-busy');
+      playBtn.querySelector('.btn-text').textContent = '再生';
+
+      // トランジションアニメーションの場合
+      if (animationType.includes('transition')) {
+        previewContainer.classList.remove(`${animationType}-animation`);
+      } else if (target) {
+        // 通常のアニメーションの場合
+        target.classList.remove(`${animationType}-animation`);
       }
+      announceAnimationComplete(title);
     };
 
-    // アニメーション終了時のハンドラー
-    const handleAnimationEnd = (event) => {
-      isPlaying = false;
-      event.target.classList.remove(`${animationType}-animation`);
-      updateButtonState(false);
+    // アニメーション終了の監視
+    const observeAnimationEnd = () => {
+      if (resetTimeout) {
+        clearTimeout(resetTimeout);
+      }
 
-      // スクリーンリーダーに通知
-      announceAnimationComplete(title);
+      let duration = 2000;
+      switch (animationType) {
+        case 'slide-transition':
+        case 'diagonal-transition':
+          duration = 2200;
+          break;
+        case 'sparkle':
+          duration = 1500;
+          break;
+        default:
+          duration = 1000;
+      }
+
+      resetTimeout = setTimeout(resetAnimation, duration);
+
+      if (!animationType.includes('transition') && target) {
+        target.addEventListener(
+          'animationend',
+          () => {
+            clearTimeout(resetTimeout);
+            resetAnimation();
+          },
+          { once: true }
+        );
+      }
     };
 
     playBtn.addEventListener('click', () => {
       if (isPlaying) return;
 
-      // アニメーション再生中は再生ボタンを無効化
       isPlaying = true;
-      updateButtonState(true);
+      playBtn.setAttribute('disabled', 'true');
+      playBtn.setAttribute('aria-busy', 'true');
+      playBtn.querySelector('.btn-text').textContent = '再生中...';
 
-      // アニメーションをリセットするために、要素を複製して置き換える
-      const newTarget = document.createElement('div');
-      newTarget.className = 'animation-target';
-      previewContainer.replaceChild(newTarget, target);
-      target = newTarget;
-
-      // アニメーション終了イベントのリスナーを追加
-      target.addEventListener('animationend', handleAnimationEnd, { once: true });
-
-      // 新しい要素にアニメーションクラスを追加
-      requestAnimationFrame(() => {
+      // トランジションアニメーションの場合
+      if (animationType.includes('transition')) {
+        previewContainer.classList.remove(`${animationType}-animation`);
+        void previewContainer.offsetWidth; // リフロー強制
+        previewContainer.classList.add(`${animationType}-animation`);
+      }
+      // 通常のアニメーションの場合
+      else if (target) {
+        target.classList.remove(`${animationType}-animation`);
+        void target.offsetWidth; // リフロー強制
         target.classList.add(`${animationType}-animation`);
-      });
+      }
 
-      // スクリーンリーダーに通知
+      observeAnimationEnd();
       announceAnimationStart(title);
     });
 
