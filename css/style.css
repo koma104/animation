@@ -19,14 +19,14 @@ body {
 /* ヘッダースタイル */
 .header {
   background-color: var(--background-color);
-  padding: 2rem 2rem;
+  padding: 1rem 2rem;
   text-align: center;
   border-bottom: 1px solid var(--border-color);
 }
 
 .header h1 {
   color: var(--text-primary);
-  font-size: 2rem;
+  font-size: 1.75rem;
   font-weight: 700;
   letter-spacing: 0.02em;
 }
@@ -110,11 +110,12 @@ body {
 /* フッター */
 .footer {
   background-color: var(--background-color);
-  padding: 0.75rem 2rem;
+  padding: 0.5rem 2rem;
   text-align: center;
   color: var(--text-secondary);
   border-top: 1px solid var(--border-color);
-  margin-top: 0.75rem;
+  margin-top: 0.5rem;
+  font-size: 0.875rem;
 }
 
 /* トランジションレイヤー */
@@ -129,11 +130,11 @@ body {
 /* レスポンシブ対応 */
 @media (max-width: 768px) {
   .header {
-    padding: 1.5rem;
+    padding: 0.75rem;
   }
 
   .header h1 {
-    font-size: 1.75rem;
+    font-size: 1.5rem;
   }
 
   .animation-grid {
