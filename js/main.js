@@ -50,6 +50,10 @@ document.addEventListener('DOMContentLoaded', () => {
         case 'sparkle':
           duration = 1500;
           break;
+        case 'line-reveal-1':
+        case 'line-reveal-2':
+          duration = 1200; // ライン分割アニメーションの時間を設定
+          break;
         default:
           duration = 1000;
       }
