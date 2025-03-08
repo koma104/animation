@@ -59,6 +59,9 @@ document.addEventListener('DOMContentLoaded', () => {
         case 'text-reveal':
           duration = 2000; // テキスト出現アニメーションの時間を設定
           break;
+        case 'circle-scale':
+          duration = 2000; // 円形拡大アニメーションの時間を設定
+          break;
         default:
           duration = 1000;
       }
