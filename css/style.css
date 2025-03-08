@@ -61,6 +61,8 @@ body {
   height: 50px;
   background-color: #3498db;
   border-radius: 4px;
+  position: relative;
+  z-index: 2;
 }
 
 .animation-card h3 {
@@ -335,6 +337,127 @@ main:focus {
 @media (prefers-reduced-motion: reduce) {
   .sparkle-animation,
   .magic-animation {
+    animation-duration: 0.1s !important;
+  }
+}
+
+/* トランジションアニメーション用のスタイル */
+[data-animation='slide-transition'] .animation-preview,
+[data-animation='diagonal-transition'] .animation-preview {
+  position: relative;
+  overflow: hidden;
+}
+
+.transition-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.animation-target {
+  position: relative;
+  z-index: 2;
+}
+
+.transition-layer::before,
+.transition-layer::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-color: #3498db;
+  transform: translateX(-101%);
+}
+
+.transition-layer::after {
+  background-color: #2980b9;
+}
+
+/* アニメーションクラス */
+.slide-transition-animation .transition-layer::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-color: #3498db;
+  transform: translateX(-101%);
+  animation: slideTransitionIn 0.8s cubic-bezier(0.87, 0.05, 0.02, 0.97) both,
+    slideTransitionOut 0.8s cubic-bezier(0.87, 0.05, 0.02, 0.97) 1.2s forwards;
+}
+
+.slide-transition-animation .transition-layer::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-color: #2980b9;
+  transform: translateX(-101%);
+  animation: slideTransitionIn 0.8s cubic-bezier(0.87, 0.05, 0.02, 0.97) 0.2s both,
+    slideTransitionOut 0.8s cubic-bezier(0.87, 0.05, 0.02, 0.97) 1.4s forwards;
+}
+
+/* 斜めトランジション用の追加スタイル */
+.diagonal-transition-animation .transition-layer.diagonal::before,
+.diagonal-transition-animation .transition-layer.diagonal::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  --skew-angle: 45deg;
+  transform: translateX(-101%) skewX(calc(var(--skew-angle) * -1));
+}
+
+.diagonal-transition-animation .transition-layer.diagonal::before {
+  background-color: #3498db;
+  animation: diagonalTransitionIn 0.8s cubic-bezier(0.87, 0.05, 0.02, 0.97) both,
+    diagonalTransitionOut 0.8s cubic-bezier(0.87, 0.05, 0.02, 0.97) 1.2s forwards;
+}
+
+.diagonal-transition-animation .transition-layer.diagonal::after {
+  background-color: #2980b9;
+  animation: diagonalTransitionIn 0.8s cubic-bezier(0.87, 0.05, 0.02, 0.97) 0.2s both,
+    diagonalTransitionOut 0.8s cubic-bezier(0.87, 0.05, 0.02, 0.97) 1.4s forwards;
+}
+
+@keyframes slideTransitionIn {
+  from {
+    transform: translateX(-101%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideTransitionOut {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(101%);
+  }
+}
+
+@keyframes diagonalTransitionIn {
+  from {
+    transform: translateX(-101%) skewX(calc(var(--skew-angle) * -1));
+  }
+  to {
+    transform: translateX(0) skewX(calc(var(--skew-angle) * -1));
+  }
+}
+
+@keyframes diagonalTransitionOut {
+  from {
+    transform: translateX(0) skewX(calc(var(--skew-angle) * -1));
+  }
+  to {
+    transform: translateX(101%) skewX(calc(var(--skew-angle) * -1));
+  }
+}
+
+/* アクセシビリティ対応 */
+@media (prefers-reduced-motion: reduce) {
+  .slide-transition-animation .transition-layer::before,
+  .slide-transition-animation .transition-layer::after,
+  .diagonal-transition-animation .transition-layer.diagonal::before,
+  .diagonal-transition-animation .transition-layer.diagonal::after {
     animation-duration: 0.1s !important;
   }
 }
