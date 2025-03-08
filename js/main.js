@@ -58,6 +58,9 @@ document.addEventListener('DOMContentLoaded', () => {
         case 'text-slide-up':
           duration = 1000; // テキストスライドアップアニメーションの時間を設定
           break;
+        case 'text-slide-up-chars':
+          duration = 3000; // アニメーション全体の時間を3秒に設定（文字アニメーション + 停止時間）
+          break;
         default:
           duration = 1000;
       }
