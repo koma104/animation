@@ -972,3 +972,49 @@ main:focus {
   .char:nth-child(9) {
   animation-delay: 0.4s;
 }
+
+/* 数字のアニメーション用スタイル */
+[data-animation='number-slide'] .animation-target {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  overflow: hidden;
+}
+
+[data-animation='number-slide'] .number {
+  font-size: 3rem;
+  font-weight: bold;
+  color: var(--text-primary);
+  transform: translate(-100%, 50%);
+  opacity: 0;
+}
+
+/* アニメーション定義 */
+@keyframes numberSlideIn {
+  0% {
+    transform: translate(-100%, 50%);
+    opacity: 0;
+  }
+  20% {
+    /* スライドイン完了 */
+    transform: translate(0, 0);
+    opacity: 1;
+  }
+  80% {
+    /* 2秒間停止（20%から80%まで同じ状態を維持） */
+    transform: translate(0, 0);
+    opacity: 1;
+  }
+  100% {
+    /* フェードアウト */
+    transform: translate(0, 0);
+    opacity: 0;
+  }
+}
+
+/* アニメーションクラス */
+.number-slide-animation .number {
+  animation: numberSlideIn 3s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  /* 全体のアニメーション時間を3秒に延長 */
+}
