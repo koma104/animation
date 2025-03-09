@@ -47,11 +47,15 @@ body {
   border: 1px solid var(--border-color);
   padding: 2rem;
   text-align: center;
-  transition: border-color 0.3s ease;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  border-radius: 0;
 }
 
 .animation-card:hover {
-  border-color: var(--text-primary);
+  border-radius: 16px;
+  transform: translateY(-4px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 /* プレビューエリア */
@@ -72,7 +76,7 @@ body {
   color: var(--text-primary);
   font-size: 1.25rem;
   font-weight: 600;
-  margin-bottom: 1.5rem;
+  margin: 0.5rem 0;
   position: relative;
 }
 
