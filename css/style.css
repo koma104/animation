@@ -19,7 +19,7 @@ body {
 /* ヘッダースタイル */
 .header {
   background-color: var(--background-color);
-  padding: 1rem 2rem;
+  padding: 0.5rem 2rem;
   text-align: center;
   border-bottom: 1px solid var(--border-color);
 }
@@ -29,6 +29,21 @@ body {
   font-size: 1.75rem;
   font-weight: 700;
   letter-spacing: 0.02em;
+}
+
+/* 括弧とAnimationの間の余白を詰める */
+.header h1,
+.footer p {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0; /* 要素間の余白をなくす */
+}
+
+/* 括弧で囲まれた部分を独立した要素として扱う */
+.header h1::before {
+  content: '（CSS）';
+  margin-right: -0.2em; /* 右側の余白を少し詰める */
 }
 
 /* アニメーショングリッド */
@@ -114,11 +129,11 @@ body {
 /* フッター */
 .footer {
   background-color: var(--background-color);
-  padding: 0.5rem 2rem;
+  padding: 0.25rem 2rem;
   text-align: center;
   color: var(--text-secondary);
   border-top: 1px solid var(--border-color);
-  margin-top: 0.5rem;
+  margin-top: 0.25rem;
   font-size: 0.875rem;
 }
 
